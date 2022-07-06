@@ -118,8 +118,6 @@ function buildCharts(sample) {
        var otu_labels= samples_result.otu_labels
        var sample_values = samples_result.sample_values 
 
-    // Deliverable 1 Step 10. Use Plotly to plot the data with the layout. 
-    Plotly.newPlot(); 
 
     // 1. Create the trace for the bubble chart.
     var bubbleData = [ {
