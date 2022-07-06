@@ -74,7 +74,12 @@ function buildCharts(sample) {
     var otu_ids = samples_result.otu_ids;
     var otu_labels= samples_result.otu_labels;
     var sample_values = samples_result.sample_values;
-
+  // wfreq only filterd and in descending order 
+    
+      wfreq = data.metadata.filter(sampleObj => sampleObj.id == sample).map(person =>
+    person.wfreq);
+    
+    
     
     // 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order  
@@ -84,11 +89,16 @@ function buildCharts(sample) {
     var sorted = otu_ids.map(id => id ).sort((a,b) => a.sample_values-b.sample_values )
     var yticks = sorted.map(tick => "UTO "+tick)
 
+
+    
+      
+    
+
     // 8. Create the trace for the bar chart. 
     var barData = [ {
       type: 'bar',
       x: sample_values.slice(0,10),
-      y: yticks.slice(0,10),
+      y: yticks.slice(0,10).reverse(),
       orientation: 'h'
     }];
 
@@ -110,7 +120,7 @@ function buildCharts(sample) {
       marker:{
           color: otu_ids,
           size: sample_values,
-          
+          sizeref: 2
 
       }
 
@@ -127,6 +137,44 @@ function buildCharts(sample) {
     Plotly.newPlot("bubble", bubbleData, bubbleLayout);
 
 
+    // layout of Gauge 
+    var gaugeData = [ {
+      type: "indicator",
+      mode: "gauge+number+delta",
+      value: wfreq,
+      title: { text: "Belly Button Washing", font: { size: 24 } },
+      subtitle: { text: "Scrubs per week", font: { size: 16 } },
+      gauge: {
+        axis: { range: [null, 10], tickwidth: 1, tickcolor: "darkblue" },
+        bar: { color: "black" },
+        bgcolor: "white",
+        borderwidth: 2,
+        bordercolor: "gray",
+        steps: [
+          { range: [0, 2], color: "cyan" },
+          { range: [2, 4], color: "royalblue" },
+          { range: [4, 6], color: "blue" },
+          { range: [6, 8], color: "skyblue" },
+          { range: [8, 10], color: "darkblue" },
+        ],
+       
+        }
+      }
+    ];
+    
+    // 5. Create the layout for the gauge chart.
+    var gaugeLayout =  {
+      width: 500,
+      height: 400,
+      margin: { t: 25, r: 25, l: 25, b: 25 },
+      paper_bgcolor: "lavender",
+      font: { color: "darkblue", family: "Arial" }
+    }
+     
+    ;
+
+    // 6. Use Plotly to plot the gauge data and layout.
+    Plotly.newPlot("gauge",gaugeData,gaugeLayout);
 
 
 
