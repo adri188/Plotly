@@ -102,4 +102,50 @@ function buildCharts(sample) {
     Plotly.newPlot("bar", barData, barLayout);
   });
 }
+// Bar and Bubble charts
+// Create the buildCharts function.
+function buildCharts(sample) {
+  // Use d3.json to load and retrieve the samples.json file 
+  d3.json("samples.json").then((data) => {
+       // 3. Create a variable that holds the samples array. 
+       var sample_data=data.samples;
+       // 4. Create a variable that filters the samples for the object with the desired sample number.
+       var FilteredArray = sample_data.filter(sampleObj => sampleObj.id == sample);
+       //  5. Create a variable that holds the first sample in the array.
+       var samples_result = FilteredArray[0];  
+
+       var otu_ids = samples_result.otu_ids
+       var otu_labels= samples_result.otu_labels
+       var sample_values = samples_result.sample_values 
+
+    // Deliverable 1 Step 10. Use Plotly to plot the data with the layout. 
+    Plotly.newPlot(); 
+
+    // 1. Create the trace for the bubble chart.
+    var bubbleData = [ {
+      x: otu_ids,
+      y: sample_values,
+      text: otu_labels,
+      mode: 'markers',
+      marker:{
+          color: otu_ids,
+          size: sample_values
+
+      }
+
+    }
+   
+    ];
+
+    // 2. Create the layout for the bubble chart.
+    var bubbleLayout = {
+      title: "Tacteria Cultures per Sample",
+      xaxis: {title: "OTU" },
+      yaxis: {title: "Total Count "} 
+    };
+
+    // 3. Use Plotly to plot the data with the layout.
+    Plotly.newPlot("bubble", bubbleData, bubbleLayout);
+  });
+}
 
