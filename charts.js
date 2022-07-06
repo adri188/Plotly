@@ -76,7 +76,7 @@ function buildCharts(sample) {
     var sample_values = samples_result.sample_values;
   // wfreq only filterd and in descending order 
     
-      wfreq = data.metadata.filter(sampleObj => sampleObj.id == sample).wfreq
+    var wfreq = data.metadata.filter(sampleObj => sampleObj.id == sample).wfreq
     
     
     
@@ -85,7 +85,7 @@ function buildCharts(sample) {
     //  so the otu_ids with the most bacteria are last. 
 
     
-    var sorted = otu_ids.map(id => id ).sort((a,b) => a.sample_values-b.sample_values )
+    var sorted = otu_ids.map(id => id ).sort((a,b) => a.sample_values-b.sample_values ).reverse()
     var yticks = sorted.map(tick => "UTO "+tick)
 
 
@@ -97,7 +97,7 @@ function buildCharts(sample) {
     var barData = [ {
       type: 'bar',
       x: sample_values.slice(0,10),
-      y: yticks.slice(0,10).reverse(),
+      y: yticks.slice(0,10),
       orientation: 'h'
     }];
 
