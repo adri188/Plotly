@@ -1,9 +1,9 @@
 body {
 
-    color: #f7f7f7;
+    color: #090909de;
   }
 .jumbotron {
-    background-image: url("bbb.jpg");
+    background-image: url("bbb.jpeg");
     background-size: 100% 100%;
     text-align: center;
   }
