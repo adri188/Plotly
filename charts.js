@@ -71,9 +71,9 @@ function buildCharts(sample) {
     
     // 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
     
-    var otu_ids = samples_result.otu_ids.slice(0,10);
-    var otu_labels= samples_result.otu_labels.slice(0,10);
-    var sample_values = samples_result.sample_values.slice(0,10).reverse();
+    var otu_ids = samples_result.otu_ids;
+    var otu_labels= samples_result.otu_labels;
+    var sample_values = samples_result.sample_values;
 
     
     // 7. Create the yticks for the bar chart.
@@ -87,8 +87,8 @@ function buildCharts(sample) {
     // 8. Create the trace for the bar chart. 
     var barData = [ {
       type: 'bar',
-      x: sample_values,
-      y: yticks,
+      x: sample_values.slice(0,10),
+      y: yticks.slice(0,10),
       orientation: 'h'
     }];
 
