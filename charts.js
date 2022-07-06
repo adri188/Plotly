@@ -76,8 +76,7 @@ function buildCharts(sample) {
     var sample_values = samples_result.sample_values;
   // wfreq only filterd and in descending order 
     
-      wfreq = data.metadata.filter(sampleObj => sampleObj.id == sample).map(person =>
-    person.wfreq);
+      wfreq = data.metadata.filter(sampleObj => sampleObj.id == sample).wfreq
     
     
     
@@ -140,10 +139,9 @@ function buildCharts(sample) {
     // layout of Gauge 
     var gaugeData = [ {
       type: "indicator",
-      mode: "gauge+number+delta",
+      mode: "gauge+number",
       value: wfreq,
       title: { text: "Belly Button Washing", font: { size: 24 } },
-      subtitle: { text: "Scrubs per week", font: { size: 16 } },
       gauge: {
         axis: { range: [null, 10], tickwidth: 1, tickcolor: "darkblue" },
         bar: { color: "black" },
